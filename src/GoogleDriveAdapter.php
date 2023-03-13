@@ -500,6 +500,9 @@ class GoogleDriveAdapter implements FilesystemAdapter
             $newParentId
         ]);
 
+        // Todo temp fix for https://github.com/googleapis/google-api-php-client/issues/2401
+        $file->setExportLinks(null);
+
         $newFile = $this->service->files->copy(/** @scrutinizer ignore-type */ $srcId, $file, $this->applyDefaultParams([
             'fields' => self::FETCHFIELDS_GET
         ], 'files.copy'));
